@@ -1,0 +1,203 @@
+---
+import type { CommercialProject, ContractsProject, HarProject } from '../data/types';
+import { AutomataPipelinePreview } from './interactive/AutomataPipelinePreview';
+
+interface Props {
+  sectionTitle: string;
+  commercialTitle: string;
+  contractsProject: ContractsProject;
+  harProject: HarProject;
+  commercialProject: CommercialProject;
+}
+
+const { sectionTitle, commercialTitle, contractsProject, harProject, commercialProject } =
+  Astro.props;
+---
+
+<section id="proyectos" class="border-b border-[var(--border)] py-14 sm:py-16">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="font-mono text-xs font-semibold text-[var(--accent)]">{sectionTitle}</p>
+
+    <div class="mt-5 grid gap-6 lg:grid-cols-12">
+      <!-- Contratos Rurales por Voz -->
+      <article class="flex flex-col justify-between rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6 lg:col-span-7">
+        <div>
+          <h2 class="font-display text-xl font-bold text-[var(--text)] sm:text-2xl">
+            {contractsProject.title}
+          </h2>
+          <p class="mt-2 text-sm text-[var(--muted)]">{contractsProject.subtitle}</p>
+          <p class="mt-4 max-w-[66ch] text-sm leading-relaxed text-[var(--text)]">
+            {contractsProject.description}
+          </p>
+
+          <ul class="mt-4 space-y-2">
+            {contractsProject.highlights.map((item) => (
+              <li class="flex items-start gap-2 text-sm text-[var(--text)]">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-5">
+            <AutomataPipelinePreview client:visible project={contractsProject} />
+          </div>
+        </div>
+
+        <div class="mt-5 border-t border-[var(--border)] pt-4">
+          <div class="flex flex-wrap gap-1.5">
+            {contractsProject.stack.map((tech) => (
+              <span class="rounded-md border border-[var(--border)] bg-[var(--bg)] px-2 py-0.5 font-mono text-xs text-[var(--muted)]">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a
+              href={contractsProject.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
+            >
+              <span>{contractsProject.liveLabel}</span>
+            </a>
+            <a
+              href={contractsProject.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg)] px-3.5 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <span>{contractsProject.repoLabel}</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- HAR UCI Classifier -->
+      <article class="flex flex-col justify-between rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6 lg:col-span-5">
+        <div>
+          <h2 class="font-display text-xl font-bold text-[var(--text)] sm:text-2xl">
+            {harProject.title}
+          </h2>
+          <p class="mt-2 text-sm text-[var(--muted)]">{harProject.subtitle}</p>
+          <p class="mt-4 text-sm leading-relaxed text-[var(--text)]">
+            {harProject.description}
+          </p>
+
+          <dl class="mt-5 grid grid-cols-2 gap-3 rounded-md border border-[var(--border)] bg-[var(--bg)] p-3.5">
+            {harProject.metrics.map((metric) => (
+              <div>
+                <dt class="text-[11px] font-medium text-[var(--muted)]">{metric.label}</dt>
+                <dd class="mt-0.5 font-mono text-xs font-semibold text-[var(--text)]">
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <div class="mt-5">
+            <h3 class="font-mono text-xs font-semibold text-[var(--muted)]">
+              {harProject.comparisonTitle}
+            </h3>
+            <div class="mt-2.5 space-y-2.5">
+              {harProject.comparisonRows.map((row) => (
+                <div
+                  class={`rounded-md border p-3 ${
+                    row.winner
+                      ? 'border-[var(--verified-border)] bg-[var(--verified-soft)]'
+                      : 'border-[var(--border)] bg-[var(--bg)]'
+                  }`}
+                >
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="font-mono text-xs font-semibold text-[var(--text)]">
+                      {row.architecture}
+                    </span>
+                    <span
+                      class={`font-mono text-sm font-bold ${
+                        row.winner ? 'text-[var(--verified)]' : 'text-[var(--muted)]'
+                      }`}
+                    >
+                      {row.cvAccuracy}
+                    </span>
+                  </div>
+                  <p class="mt-1 text-xs text-[var(--muted)]">{row.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 border-t border-[var(--border)] pt-4">
+          <div class="flex flex-wrap gap-1.5">
+            {harProject.stack.map((tech) => (
+              <span class="rounded-md border border-[var(--border)] bg-[var(--bg)] px-2 py-0.5 font-mono text-xs text-[var(--muted)]">
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a
+              href={harProject.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
+            >
+              <span>{harProject.liveLabel}</span>
+            </a>
+            <a
+              href={harProject.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg)] px-3.5 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <span>{harProject.repoLabel}</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Teje Ideas: Entrega comercial concisa -->
+    <article class="mt-6 rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6">
+      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
+        <div class="max-w-3xl">
+          <p class="font-mono text-xs font-semibold text-[var(--accent)]">{commercialTitle}</p>
+          <h3 class="mt-1 font-display text-lg font-bold text-[var(--text)] sm:text-xl">
+            {commercialProject.title}
+          </h3>
+          <p class="mt-1.5 text-sm text-[var(--muted)]">{commercialProject.subtitle}</p>
+          <p class="mt-3 max-w-[68ch] text-sm text-[var(--text)]">
+            {commercialProject.description}
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-xs text-[var(--muted)]">
+            {commercialProject.deliverables.map((item) => (
+              <li class="flex items-center gap-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-[var(--verified)]" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="flex shrink-0 flex-wrap items-center gap-3">
+          <a
+            href={commercialProject.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-md bg-[var(--accent)] px-3.5 py-2 text-sm font-medium text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
+          >
+            <span>{commercialProject.liveLabel}</span>
+          </a>
+          <a
+            href={commercialProject.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg)] px-3.5 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <span>{commercialProject.repoLabel}</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

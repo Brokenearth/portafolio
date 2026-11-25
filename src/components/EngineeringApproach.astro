@@ -1,0 +1,92 @@
+---
+import type { EngineeringApproachData, Locale, ProfileData } from '../data/types';
+import { CopyEmailButton } from './interactive/CopyEmailButton';
+
+interface Props {
+  locale: Locale;
+  approach: EngineeringApproachData;
+  profile: ProfileData;
+  footer: {
+    builtWith: string;
+    availability: string;
+  };
+}
+
+const { locale, approach, profile, footer } = Astro.props;
+const cvHref = locale === 'en' ? '/en/cv' : '/cv';
+---
+
+<section id="enfoque" class="py-14 sm:py-16">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="max-w-3xl">
+      <h2 class="font-display text-2xl font-bold text-[var(--text)] sm:text-3xl">
+        {approach.title}
+      </h2>
+      <p class="mt-3 text-base leading-relaxed text-[var(--muted)]">
+        {approach.subtitle}
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      {approach.pillars.map((pillar) => (
+        <article class="flex flex-col justify-between rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5">
+          <div>
+            <h3 class="font-display text-base font-semibold text-[var(--text)]">
+              {pillar.title}
+            </h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-[var(--muted)]">
+              {pillar.summary}
+            </p>
+          </div>
+          <p class="mt-4 border-t border-[var(--border)] pt-3 font-mono text-xs text-[var(--accent)]">
+            {pillar.evidence}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-10 rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8">
+      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
+        <div class="max-w-2xl">
+          <h2 class="font-display text-xl font-bold text-[var(--text)] sm:text-2xl">
+            {approach.contactTitle}
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+            {approach.contactText}
+          </p>
+          <p class="mt-2 font-mono text-xs text-[var(--text)]">
+            {profile.email} · {profile.githubHandle}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <CopyEmailButton
+            client:visible
+            email={profile.email}
+            label={profile.copyEmailLabel}
+            copiedLabel={profile.copiedEmailLabel}
+          />
+          <a
+            href={`mailto:${profile.email}`}
+            class="inline-flex items-center rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
+          >
+            {profile.openMailLabel}
+          </a>
+          <a
+            href={cvHref}
+            class="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--bg)] px-4 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            {profile.cvCta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-[var(--border)] py-8">
+  <div class="mx-auto flex max-w-6xl flex-col justify-between gap-2 px-4 text-xs text-[var(--muted)] sm:flex-row sm:px-6">
+    <p>{footer.builtWith}</p>
+    <p class="font-mono">{footer.availability}</p>
+  </div>
+</footer>

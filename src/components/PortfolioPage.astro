@@ -1,0 +1,43 @@
+---
+import type { Locale } from '../data/types';
+import { getPortfolioData } from '../data/portfolio';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import HeroSection from './HeroSection.astro';
+import UniSportShowcase from './UniSportShowcase.astro';
+import TechnicalProjectsSection from './TechnicalProjectsSection.astro';
+import EngineeringApproach from './EngineeringApproach.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const data = getPortfolioData(locale);
+---
+
+<BaseLayout
+  locale={data.locale}
+  title={data.meta.title}
+  description={data.meta.description}
+  skipLabel={data.nav.skipToContent}
+>
+  <SiteHeader locale={data.locale} shortName={data.profile.shortName} nav={data.nav} />
+  <main id="main-content">
+    <HeroSection locale={data.locale} profile={data.profile} />
+    <UniSportShowcase sectionTitle={data.sectionTitles.flagship} caseStudy={data.uniSport} />
+    <TechnicalProjectsSection
+      sectionTitle={data.sectionTitles.selectedSystems}
+      commercialTitle={data.sectionTitles.commercialDelivery}
+      contractsProject={data.contractsProject}
+      harProject={data.harProject}
+      commercialProject={data.commercialProject}
+    />
+    <EngineeringApproach
+      locale={data.locale}
+      approach={data.approach}
+      profile={data.profile}
+      footer={data.footer}
+    />
+  </main>
+</BaseLayout>

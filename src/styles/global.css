@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: light;
+  --bg: #F6F8FA;
+  --surface: #FFFFFF;
+  --surface-muted: #EEF2F6;
+  --text: #0F172A;
+  --muted: #475569;
+  --border: #CBD5E1;
+  --accent: #1D4ED8;
+  --accent-hover: #1E40AF;
+  --accent-soft: #EFF6FF;
+  --on-accent: #FFFFFF;
+  --verified: #047857;
+  --verified-soft: #ECFDF5;
+  --verified-border: #A7F3D0;
+  --warning: #B45309;
+  --warning-soft: #FFFBEB;
+  --warning-border: #FDE68A;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0B111E;
+  --surface: #111928;
+  --surface-muted: #162033;
+  --text: #F1F5F9;
+  --muted: #94A3B8;
+  --border: #243247;
+  --accent: #3B82F6;
+  --accent-hover: #60A5FA;
+  --accent-soft: rgba(59, 130, 246, 0.14);
+  --on-accent: #FFFFFF;
+  --verified: #34D399;
+  --verified-soft: rgba(16, 185, 129, 0.14);
+  --verified-border: rgba(52, 211, 153, 0.35);
+  --warning: #FBBF24;
+  --warning-soft: rgba(245, 158, 11, 0.14);
+  --warning-border: rgba(251, 191, 36, 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+    size: letter;
+  }
+
+  html,
+  body,
+  [data-theme="dark"] {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    --bg: #FFFFFF !important;
+    --surface: #FFFFFF !important;
+    --surface-muted: #F8FAFC !important;
+    --text: #0F172A !important;
+    --muted: #334155 !important;
+    --border: #CBD5E1 !important;
+    --accent: #1D4ED8 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-sheet {
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  a {
+    color: #0F172A !important;
+    text-decoration: none !important;
+  }
+}

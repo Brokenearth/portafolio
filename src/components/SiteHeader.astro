@@ -1,0 +1,72 @@
+---
+import type { Locale, NavLabels } from '../data/types';
+import { ThemeToggle } from './interactive/ThemeToggle';
+
+interface Props {
+  locale: Locale;
+  shortName: string;
+  nav: NavLabels;
+  isCvPage?: boolean;
+}
+
+const { locale, shortName, nav, isCvPage = false } = Astro.props;
+const homeHref = locale === 'en' ? '/en/' : '/';
+const cvHref = locale === 'en' ? '/en/cv' : '/cv';
+const langHref = isCvPage ? (locale === 'en' ? '/cv' : '/en/cv') : nav.switchLangHref;
+---
+
+<header class="no-print sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+    <a
+      href={homeHref}
+      class="inline-flex items-center gap-2.5 font-display text-sm font-bold tracking-tight text-[var(--text)] hover:text-[var(--accent)]"
+    >
+      <span
+        class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[var(--accent)] font-mono text-xs font-semibold text-[var(--on-accent)]"
+        aria-hidden="true"
+      >
+        JH
+      </span>
+      <span>{shortName}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-6 text-sm text-[var(--muted)] md:flex">
+      {!isCvPage && (
+        <>
+          <a href="#unisport" class="transition-colors hover:text-[var(--text)]">
+            {nav.architecture}
+          </a>
+          <a href="#proyectos" class="transition-colors hover:text-[var(--text)]">
+            {nav.projects}
+          </a>
+          <a href="#enfoque" class="transition-colors hover:text-[var(--text)]">
+            {nav.approach}
+          </a>
+        </>
+      )}
+      <a
+        href={cvHref}
+        class={`transition-colors hover:text-[var(--text)] ${isCvPage ? 'font-semibold text-[var(--accent)]' : ''}`}
+      >
+        {nav.cv}
+      </a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={cvHref}
+        class="inline-flex h-9 items-center rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 font-mono text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] md:hidden"
+      >
+        {nav.cv}
+      </a>
+      <a
+        href={langHref}
+        hreflang={locale === 'en' ? 'es' : 'en'}
+        class="inline-flex h-9 items-center rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 font-mono text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+      >
+        {nav.switchLangLabel}
+      </a>
+      <ThemeToggle client:load toDarkLabel={nav.themeToDark} toLightLabel={nav.themeToLight} />
+    </div>
+  </div>
+</header>
