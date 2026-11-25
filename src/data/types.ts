@@ -28,6 +28,8 @@ export interface ProfileData {
   email: string;
   githubUrl: string;
   githubHandle: string;
+  linkedinUrl: string;
+  linkedinHandle: string;
   headline: string;
   summary: string;
   primaryCta: string;

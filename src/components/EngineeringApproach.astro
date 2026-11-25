@@ -55,7 +55,15 @@ const cvHref = locale === 'en' ? '/en/cv' : '/cv';
             {approach.contactText}
           </p>
           <p class="mt-2 font-mono text-xs text-[var(--text)]">
-            {profile.email} · {profile.githubHandle}
+            {profile.email} · {profile.githubHandle} ·{' '}
+            <a
+              href={profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-[var(--border)] underline-offset-2 hover:text-[var(--accent)]"
+            >
+              {profile.linkedinHandle}
+            </a>
           </p>
         </div>
 
