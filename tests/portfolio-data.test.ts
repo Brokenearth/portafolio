@@ -17,6 +17,8 @@ describe('Portfolio bilingual data integrity & anti-slop contract', () => {
     expect(en.profile.githubUrl).toBe('https://github.com/Brokenearth');
     expect(es.profile.linkedinUrl).toBe('https://www.linkedin.com/in/johan-deivy-hernandez/');
     expect(en.profile.linkedinUrl).toBe('https://www.linkedin.com/in/johan-deivy-hernandez/');
+    expect(es.profile.portfolioUrl).toBe('https://portafoliobrokenearth.vercel.app/');
+    expect(en.profile.portfolioUrl).toBe('https://portafoliobrokenearth.vercel.app/');
 
     expect(es.uniSport.nodes).toHaveLength(6);
     expect(en.uniSport.nodes).toHaveLength(6);

@@ -64,7 +64,11 @@ const homeHref = locale === 'en' ? '/en/' : '/';
         </h1>
         <p class="mt-1 text-base font-medium text-[var(--accent)]">{data.profile.role}</p>
         <p class="mt-2 font-mono text-xs text-[var(--muted)]">
-          {data.profile.email} · {data.profile.githubHandle} · {data.profile.linkedinHandle} · {data.profile.location}
+          {data.profile.email} ·{' '}
+          <a href={data.profile.portfolioUrl} class="underline decoration-[var(--border)] underline-offset-2 hover:text-[var(--accent)]">
+            {data.profile.portfolioHandle}
+          </a>{' '}
+          · {data.profile.githubHandle} · {data.profile.linkedinHandle} · {data.profile.location}
         </p>
         <p class="mt-4 max-w-[70ch] text-sm leading-relaxed text-[var(--text)]">
           {data.profile.summary}

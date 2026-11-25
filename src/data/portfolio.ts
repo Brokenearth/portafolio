@@ -30,6 +30,8 @@ const ES_DATA: PortfolioContent = {
     githubHandle: 'github.com/Brokenearth',
     linkedinUrl: 'https://www.linkedin.com/in/johan-deivy-hernandez/',
     linkedinHandle: 'linkedin.com/in/johan-deivy-hernandez',
+    portfolioUrl: 'https://portafoliobrokenearth.vercel.app/',
+    portfolioHandle: 'portafoliobrokenearth.vercel.app',
     headline:
       'Construyo software modular, probado y desplegado en producción.',
     summary:
@@ -491,6 +493,8 @@ const EN_DATA: PortfolioContent = {
     githubHandle: 'github.com/Brokenearth',
     linkedinUrl: 'https://www.linkedin.com/in/johan-deivy-hernandez/',
     linkedinHandle: 'linkedin.com/in/johan-deivy-hernandez',
+    portfolioUrl: 'https://portafoliobrokenearth.vercel.app/',
+    portfolioHandle: 'portafoliobrokenearth.vercel.app',
     headline:
       'I build modular, tested software deployed to production.',
     summary:
