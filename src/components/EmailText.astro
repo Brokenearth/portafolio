@@ -1,0 +1,12 @@
+---
+import { splitEmail } from '../data/email';
+
+interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+const { user, domain } = splitEmail(email);
+---
+
+<Fragment set:html="<!--email_off-->" /><span class="inline-flex items-baseline"><span>{user}</span><span>&#64;</span><span>{domain}</span></span><Fragment set:html="<!--/email_off-->" />

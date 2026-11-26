@@ -1,6 +1,9 @@
 ---
 import type { EngineeringApproachData, Locale, ProfileData } from '../data/types';
+import { splitEmail } from '../data/email';
+import EmailText from './EmailText.astro';
 import { CopyEmailButton } from './interactive/CopyEmailButton';
+import { MailtoButton } from './interactive/MailtoButton';
 
 interface Props {
   locale: Locale;
@@ -14,6 +17,7 @@ interface Props {
 
 const { locale, approach, profile, footer } = Astro.props;
 const cvHref = locale === 'en' ? '/en/cv' : '/cv';
+const { user: emailUser, domain: emailDomain } = splitEmail(profile.email);
 ---
 
 <section id="enfoque" class="py-14 sm:py-16">
@@ -55,7 +59,7 @@ const cvHref = locale === 'en' ? '/en/cv' : '/cv';
             {approach.contactText}
           </p>
           <p class="mt-2 font-mono text-xs text-[var(--text)]">
-            {profile.email} · {profile.githubHandle} ·{' '}
+            <EmailText email={profile.email} /> · {profile.githubHandle} ·{' '}
             <a
               href={profile.linkedinUrl}
               target="_blank"
@@ -70,16 +74,17 @@ const cvHref = locale === 'en' ? '/en/cv' : '/cv';
         <div class="flex flex-wrap items-center gap-3">
           <CopyEmailButton
             client:visible
-            email={profile.email}
+            emailUser={emailUser}
+            emailDomain={emailDomain}
             label={profile.copyEmailLabel}
             copiedLabel={profile.copiedEmailLabel}
           />
-          <a
-            href={`mailto:${profile.email}`}
-            class="inline-flex items-center rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
-          >
-            {profile.openMailLabel}
-          </a>
+          <MailtoButton
+            client:visible
+            emailUser={emailUser}
+            emailDomain={emailDomain}
+            label={profile.openMailLabel}
+          />
           <a
             href={cvHref}
             class="inline-flex items-center rounded-md border border-[var(--border)] bg-[var(--bg)] px-4 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"

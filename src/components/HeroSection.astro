@@ -1,5 +1,6 @@
 ---
 import type { Locale, ProfileData } from '../data/types';
+import { splitEmail } from '../data/email';
 import { CopyEmailButton } from './interactive/CopyEmailButton';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 const { locale, profile } = Astro.props;
 const cvHref = locale === 'en' ? '/en/cv' : '/cv';
+const { user: emailUser, domain: emailDomain } = splitEmail(profile.email);
 
 const parsedMetrics = profile.metrics.map((metric) => {
   const match = metric.value.match(/^([\d.,]+)(.*)$/);
@@ -70,7 +72,8 @@ const parsedMetrics = profile.metrics.map((metric) => {
 
         <CopyEmailButton
           client:load
-          email={profile.email}
+          emailUser={emailUser}
+          emailDomain={emailDomain}
           label={profile.copyEmailLabel}
           copiedLabel={profile.copiedEmailLabel}
         />

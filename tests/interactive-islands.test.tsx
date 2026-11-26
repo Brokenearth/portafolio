@@ -4,6 +4,7 @@ import { getPortfolioData } from '../src/data/portfolio';
 import { UniSportArchitectureInspector } from '../src/components/interactive/UniSportArchitectureInspector';
 import { AutomataPipelinePreview } from '../src/components/interactive/AutomataPipelinePreview';
 import { CopyEmailButton } from '../src/components/interactive/CopyEmailButton';
+import { MailtoButton } from '../src/components/interactive/MailtoButton';
 
 describe('Interactive islands', () => {
   it('UniSportArchitectureInspector renders all 6 nodes and updates technical panel on click', () => {
@@ -46,7 +47,8 @@ describe('Interactive islands', () => {
 
     render(
       <CopyEmailButton
-        email="johanhernandez064@gmail.com"
+        emailUser="johanhernandez064"
+        emailDomain="gmail.com"
         label="Copiar correo"
         copiedLabel="Correo copiado"
       />
@@ -57,5 +59,23 @@ describe('Interactive islands', () => {
 
     expect(writeText).toHaveBeenCalledWith('johanhernandez064@gmail.com');
     expect(await screen.findByRole('status')).toHaveTextContent('Correo copiado');
+  });
+
+  it('MailtoButton dispatches mailto URI on click without rendering a raw mailto link', () => {
+    const onNavigate = vi.fn();
+
+    render(
+      <MailtoButton
+        emailUser="johanhernandez064"
+        emailDomain="gmail.com"
+        label="Enviar correo"
+        onNavigate={onNavigate}
+      />
+    );
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    const btn = screen.getByRole('button', { name: /Enviar correo/i });
+    fireEvent.click(btn);
+    expect(onNavigate).toHaveBeenCalledWith('mailto:johanhernandez064@gmail.com');
   });
 });

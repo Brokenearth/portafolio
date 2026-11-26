@@ -20,6 +20,10 @@ describe('Static build output verification', () => {
 
       expect(html).toContain(`<html lang="${page.lang}"`);
       expect(html).not.toMatch(/\b(ticap|aquaevaltim|acuicultura|piscicultura|tilapia|gestorcamras)\b/i);
+      expect(html).not.toContain('href="mailto:');
+      expect(html).not.toContain('johanhernandez064@gmail.com');
+      expect(html).toContain('johanhernandez064');
+      expect(html).toContain('gmail.com');
 
       if (page.requireLiveUrls) {
         expect(html).toContain('astro-view-transitions-enabled');

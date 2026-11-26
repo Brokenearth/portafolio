@@ -3,12 +3,20 @@ import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m } from 'moti
 import { Check, Copy } from 'lucide-react';
 
 interface CopyEmailButtonProps {
-  email: string;
+  email?: string;
+  emailUser?: string;
+  emailDomain?: string;
   label: string;
   copiedLabel: string;
 }
 
-export function CopyEmailButton({ email, label, copiedLabel }: CopyEmailButtonProps) {
+export function CopyEmailButton({
+  email,
+  emailUser,
+  emailDomain,
+  label,
+  copiedLabel,
+}: CopyEmailButtonProps) {
   const [copied, setCopied] = useState(false);
   const timerRef = useRef<number | null>(null);
 
@@ -20,16 +28,24 @@ export function CopyEmailButton({ email, label, copiedLabel }: CopyEmailButtonPr
     };
   }, []);
 
+  const resolveAddress = () => {
+    if (emailUser && emailDomain) {
+      return `${emailUser}@${emailDomain}`;
+    }
+    return email ?? '';
+  };
+
   const handleCopy = async () => {
+    const address = resolveAddress();
     try {
-      await navigator.clipboard.writeText(email);
+      await navigator.clipboard.writeText(address);
       setCopied(true);
       if (timerRef.current !== null) {
         window.clearTimeout(timerRef.current);
       }
       timerRef.current = window.setTimeout(() => setCopied(false), 2400);
     } catch {
-      window.location.href = `mailto:${email}`;
+      window.location.href = `mailto:${address}`;
     }
   };
 
