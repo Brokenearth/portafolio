@@ -22,6 +22,9 @@ describe('Static build output verification', () => {
       expect(html).not.toMatch(/\b(ticap|aquaevaltim|acuicultura|piscicultura|tilapia|gestorcamras)\b/i);
 
       if (page.requireLiveUrls) {
+        expect(html).toContain('astro-view-transitions-enabled');
+        expect(html).toContain('data-reading-progress');
+        expect(html).toContain('data-meter-fill');
         expect(html).toContain('https://victorious-desert-02f78d31e.6.azurestaticapps.net');
         expect(html).toContain('https://easycontractfield.netlify.app/#redactar');
         expect(html).toContain('https://harclassifier-uci.netlify.app/');

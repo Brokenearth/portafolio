@@ -13,6 +13,7 @@ describe('Interactive islands', () => {
     const buttons = screen.getAllByRole('button');
     expect(buttons).toHaveLength(6);
     expect(buttons[0]).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTestId('unisport-topology-svg')).toBeInTheDocument();
 
     const reservationsNode = screen.getByRole('button', { name: /Reservations/i });
     fireEvent.click(reservationsNode);

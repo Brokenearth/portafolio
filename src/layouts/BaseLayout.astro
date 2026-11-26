@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import type { Locale } from '../data/types';
 
@@ -30,15 +31,20 @@ const { locale, title, description, skipLabel } = Astro.props;
       rel="stylesheet"
     />
     <title>{title}</title>
+    <ClientRouter />
     <script is:inline>
       (function () {
-        try {
-          var saved = localStorage.getItem('jh-theme');
-          var theme = saved === 'dark' ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', theme);
-        } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'light');
+        function applyTheme() {
+          try {
+            var saved = localStorage.getItem('jh-theme');
+            var theme = saved === 'dark' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
         }
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
       })();
     </script>
   </head>
@@ -50,5 +56,11 @@ const { locale, title, description, skipLabel } = Astro.props;
       {skipLabel}
     </a>
     <slot />
+    <script>
+      import { cleanupPortfolioMotion, initPortfolioMotion } from '../scripts/motion-orchestrator';
+
+      document.addEventListener('astro:before-preparation', cleanupPortfolioMotion);
+      document.addEventListener('astro:page-load', initPortfolioMotion);
+    </script>
   </body>
 </html>

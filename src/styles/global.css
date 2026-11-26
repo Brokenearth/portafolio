@@ -24,6 +24,8 @@
   --warning: #B45309;
   --warning-soft: #FFFBEB;
   --warning-border: #FDE68A;
+  --grid-line: rgba(15, 23, 42, 0.055);
+  --spotlight: rgba(29, 78, 216, 0.075);
 }
 
 [data-theme="dark"] {
@@ -44,6 +46,8 @@
   --warning: #FBBF24;
   --warning-soft: rgba(245, 158, 11, 0.14);
   --warning-border: rgba(251, 191, 36, 0.35);
+  --grid-line: rgba(148, 163, 184, 0.08);
+  --spotlight: rgba(59, 130, 246, 0.14);
 }
 
 html {
@@ -71,9 +75,81 @@ h1, h2, h3, h4 {
   outline-offset: 2px;
 }
 
+.hero-blueprint-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 75% at 45% 35%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 75% at 45% 35%, #000 35%, transparent 100%);
+}
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 180ms ease;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  background: radial-gradient(
+    360px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--spotlight),
+    transparent 65%
+  );
+  z-index: 0;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+}
+
+.reading-progress {
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.meter-fill {
+  transform-origin: left center;
+}
+
+@keyframes signal-flow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.signal-flow {
+  stroke-dasharray: 6 6;
+  animation: signal-flow 1.2s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .signal-flow {
+    animation: none !important;
+  }
+
+  .spotlight-card::before {
+    display: none !important;
   }
 
   *,
@@ -105,7 +181,13 @@ h1, h2, h3, h4 {
     --accent: #1D4ED8 !important;
   }
 
-  .no-print {
+  .no-print,
+  .hero-blueprint-grid,
+  .reading-progress {
+    display: none !important;
+  }
+
+  .spotlight-card::before {
     display: none !important;
   }
 

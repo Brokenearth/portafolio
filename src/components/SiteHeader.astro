@@ -69,4 +69,11 @@ const langHref = isCvPage ? (locale === 'en' ? '/cv' : '/en/cv') : nav.switchLan
       <ThemeToggle client:load toDarkLabel={nav.themeToDark} toLightLabel={nav.themeToLight} />
     </div>
   </div>
+  {!isCvPage && (
+    <div
+      data-reading-progress
+      aria-hidden="true"
+      class="reading-progress pointer-events-none h-[2px] w-full bg-[var(--accent)]"
+    />
+  )}
 </header>

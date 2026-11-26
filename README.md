@@ -1,6 +1,6 @@
 # Portafolio — Johan Deivy Hernández Basallo
 
-**En vivo:** [portafoliobrokenearth.vercel.app](https://portafoliobrokenearth.vercel.app/)
+**En vivo:** [johanhernandez.dpdns.org](https://johanhernandez.dpdns.org/)
 
 Portafolio técnico bilingüe (Español / Inglés) enfocado en **Ingeniería de Software Full-Stack y Arquitectura de Sistemas**. Construido con Astro 5, React 19 (islas interactivas en TypeScript), Tailwind CSS v4 y Vitest.
 

@@ -56,7 +56,7 @@ const { sectionTitle, caseStudy } = Astro.props;
     </div>
 
     <div class="mt-8 grid gap-6 lg:grid-cols-12">
-      <div class="rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 lg:col-span-7">
+      <div class="spotlight-card rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 lg:col-span-7">
         <p class="max-w-[68ch] text-sm leading-relaxed text-[var(--text)]">
           {caseStudy.overview}
         </p>
@@ -87,7 +87,7 @@ const { sectionTitle, caseStudy } = Astro.props;
         </p>
       </div>
 
-      <div class="flex flex-col justify-between rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 lg:col-span-5">
+      <div class="spotlight-card flex flex-col justify-between rounded-[10px] border border-[var(--border)] bg-[var(--surface)] p-5 lg:col-span-5">
         <dl class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
           {caseStudy.metrics.map((metric) => (
             <div class="flex items-baseline justify-between gap-3 border-b border-[var(--border)] pb-2.5 last:border-b-0 last:pb-0">
