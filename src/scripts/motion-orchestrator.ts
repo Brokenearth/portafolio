@@ -52,8 +52,20 @@ function setupSpotlightCards(signal: AbortSignal): void {
   });
 }
 
+function hydrateEmailText(): void {
+  const nodes = document.querySelectorAll<HTMLElement>('[data-email-text]');
+  nodes.forEach((node) => {
+    const user = node.dataset.u;
+    const domain = node.dataset.d;
+    if (user && domain) {
+      node.textContent = `${user}@${domain}`;
+    }
+  });
+}
+
 export function initPortfolioMotion(): void {
   cleanupPortfolioMotion();
+  hydrateEmailText();
 
   spotlightController = new AbortController();
   setupSpotlightCards(spotlightController.signal);

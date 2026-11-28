@@ -9,4 +9,10 @@ const { email } = Astro.props;
 const { user, domain } = splitEmail(email);
 ---
 
-<Fragment set:html="<!--email_off-->" /><span class="inline-flex items-baseline"><span>{user}</span><span>&#64;</span><span>{domain}</span></span><Fragment set:html="<!--/email_off-->" />
+<span class="whitespace-nowrap" data-email-text data-u={user} data-d={domain}>{user}<span class="email-at" aria-hidden="true"></span>{domain}</span>
+
+<style>
+  .email-at::before {
+    content: '@';
+  }
+</style>

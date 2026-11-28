@@ -21,7 +21,10 @@ describe('Static build output verification', () => {
       expect(html).toContain(`<html lang="${page.lang}"`);
       expect(html).not.toMatch(/\b(ticap|aquaevaltim|acuicultura|piscicultura|tilapia|gestorcamras)\b/i);
       expect(html).not.toContain('href="mailto:');
+      expect(html).not.toContain('email_off');
+      expect(html).not.toContain('&#64;');
       expect(html).not.toContain('johanhernandez064@gmail.com');
+      expect(html).toContain('data-email-text');
       expect(html).toContain('johanhernandez064');
       expect(html).toContain('gmail.com');
       expect(html).toContain('Spec-Driven Development');
