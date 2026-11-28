@@ -26,6 +26,10 @@ describe('Portfolio bilingual data integrity & anti-slop contract', () => {
     expect(en.contractsProject.samples).toHaveLength(3);
     expect(es.approach.pillars).toHaveLength(3);
     expect(en.approach.pillars).toHaveLength(3);
+    expect(es.approach.workflowSteps).toHaveLength(4);
+    expect(en.approach.workflowSteps).toHaveLength(4);
+    expect(es.approach.workflowTitle).toContain('Spec-Driven Development');
+    expect(en.approach.workflowTitle).toContain('Spec-Driven Development');
   });
 
   it('includes all four verified live deployment URLs', () => {

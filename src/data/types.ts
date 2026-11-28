@@ -158,10 +158,17 @@ export interface EngineeringPillar {
   evidence: string;
 }
 
+export interface WorkflowStep {
+  stage: string;
+  detail: string;
+}
+
 export interface EngineeringApproachData {
   title: string;
   subtitle: string;
   pillars: EngineeringPillar[];
+  workflowTitle: string;
+  workflowSteps: WorkflowStep[];
   contactTitle: string;
   contactText: string;
 }

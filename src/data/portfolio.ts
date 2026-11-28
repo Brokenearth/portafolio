@@ -35,7 +35,7 @@ const ES_DATA: PortfolioContent = {
     headline:
       'Construyo software modular, probado y desplegado en producción.',
     summary:
-      'Estudiante de último semestre de Ingeniería de Sistemas en la Universidad de los Llanos. Diseño límites limpios entre dominio, datos e interfaz, respaldo cada entrega con pruebas automatizadas y utilizo herramientas de IA como multiplicador bajo verificación técnica rigurosa.',
+      'Estudiante de último semestre de Ingeniería de Sistemas en la Universidad de los Llanos. Diseño límites limpios entre dominio, datos e interfaz, trabajo bajo Spec-Driven Development y programación asistida por IA con verificación automatizada en cada entrega.',
     primaryCta: 'Explorar arquitectura UniSport',
     cvCta: 'Ver CV imprimible',
     copyEmailLabel: 'Copiar correo',
@@ -375,10 +375,29 @@ const ES_DATA: PortfolioContent = {
         evidence: '1,255 tests automatizados en UniSport y StratifiedGroupKFold en HAR UCI.',
       },
       {
-        title: 'Orquestación e ingeniería aumentada por IA',
+        title: 'Spec-Driven Development y programación asistida por IA',
         summary:
-          'Uso flujos multiagente, especificaciones previas y revisión crítica para acelerar entregas sin sacrificar legibilidad, seguridad ni mantenibilidad.',
-        evidence: 'Flujo reproducible desde el diseño arquitectónico hasta el despliegue en nube.',
+          'Domino el uso de IA para programar guiado por especificaciones: defino arquitectura, contratos y criterios de aceptación antes de escribir código, orquesto herramientas de IA para acelerar la entrega y audito el resultado con pruebas automatizadas.',
+        evidence: 'Flujo repetible: Spec · Plan técnico · Implementación con IA · Pruebas y CI/CD.',
+      },
+    ],
+    workflowTitle: 'Flujo de trabajo: Spec-Driven Development asistido por IA',
+    workflowSteps: [
+      {
+        stage: 'Especificación (Spec)',
+        detail: 'Definir problema, límites de arquitectura, contratos de datos y criterios de aceptación.',
+      },
+      {
+        stage: 'Plan técnico',
+        detail: 'Descomponer la entrega en tareas verificables y detectar riesgos antes de editar código.',
+      },
+      {
+        stage: 'Implementación con IA',
+        detail: 'Orquestar asistentes y agentes de IA para construir rápido manteniendo código limpio y tipado.',
+      },
+      {
+        stage: 'Verificación y CI/CD',
+        detail: 'Validar con pruebas automatizadas (TDD, integración, navegador) y compuertas de calidad.',
       },
     ],
     contactTitle: 'Disponible para vacantes Junior / Full-Stack y proyectos de ingeniería',
@@ -450,8 +469,15 @@ const ES_DATA: PortfolioContent = {
         items: ['PostgreSQL (esquemas)', 'Entity Framework Core', 'PyTorch', 'Validación por sujeto', 'Autómatas y Compilación'],
       },
       {
-        category: 'Cloud, Testing y DevOps',
-        items: ['Azure Pipelines', 'Docker & ACR', 'Testcontainers', 'Vitest', 'k6', 'Netlify / Vercel / Cloudflare R2'],
+        category: 'Cloud, DevOps e Ingeniería con IA',
+        items: [
+          'Azure Pipelines',
+          'Docker & ACR',
+          'Testcontainers / Vitest / k6',
+          'Spec-Driven Development (SDD)',
+          'Programación asistida por IA',
+          'Orquestación de agentes',
+        ],
       },
     ],
     languagesTitle: 'Idiomas',
@@ -498,7 +524,7 @@ const EN_DATA: PortfolioContent = {
     headline:
       'I build modular, tested software deployed to production.',
     summary:
-      'Final-semester Systems Engineering student at Universidad de los Llanos. I design clean boundaries across domain, data, and UI layers, back every delivery with automated testing, and leverage AI tooling with rigorous engineering verification.',
+      'Final-semester Systems Engineering student at Universidad de los Llanos. I design clean boundaries across domain, data, and UI layers, working with Spec-Driven Development and AI-assisted programming backed by automated verification on every release.',
     primaryCta: 'Inspect UniSport architecture',
     cvCta: 'View printable resume',
     copyEmailLabel: 'Copy email',
@@ -838,10 +864,29 @@ const EN_DATA: PortfolioContent = {
         evidence: '1,255 automated tests in UniSport and StratifiedGroupKFold in HAR UCI.',
       },
       {
-        title: 'AI-augmented engineering and orchestration',
+        title: 'Spec-Driven Development & AI-assisted programming',
         summary:
-          'I use structured specifications, multi-step verification, and AI tooling to accelerate delivery without compromising readability, security, or maintainability.',
-        evidence: 'Repeatable workflow from system design through cloud deployment.',
+          'Proficient in AI-assisted software engineering under Spec-Driven Development: I define architecture, contracts, and acceptance criteria up front, orchestrate AI coding tools for velocity, and audit every change with automated tests.',
+        evidence: 'Repeatable workflow: Spec · Technical plan · AI-assisted build · Tests & CI/CD.',
+      },
+    ],
+    workflowTitle: 'Workflow: AI-assisted Spec-Driven Development',
+    workflowSteps: [
+      {
+        stage: 'Specification (Spec)',
+        detail: 'Define problem scope, architecture boundaries, data contracts, and acceptance criteria.',
+      },
+      {
+        stage: 'Technical Plan',
+        detail: 'Break delivery into verifiable tasks and surface edge cases before writing code.',
+      },
+      {
+        stage: 'AI-Assisted Build',
+        detail: 'Orchestrate AI coding tools and agents for speed while enforcing clean, typed code.',
+      },
+      {
+        stage: 'Verification & CI/CD',
+        detail: 'Validate behavior through automated tests (TDD, integration, browser) and CI gates.',
       },
     ],
     contactTitle: 'Available for Junior / Full-Stack Engineering roles',
@@ -913,8 +958,15 @@ const EN_DATA: PortfolioContent = {
         items: ['PostgreSQL (schemas)', 'Entity Framework Core', 'PyTorch', 'Subject-split CV', 'Automata & Compilers'],
       },
       {
-        category: 'Cloud, Testing & DevOps',
-        items: ['Azure Pipelines', 'Docker & ACR', 'Testcontainers', 'Vitest', 'k6', 'Netlify / Vercel / Cloudflare R2'],
+        category: 'Cloud, DevOps & AI Engineering',
+        items: [
+          'Azure Pipelines',
+          'Docker & ACR',
+          'Testcontainers / Vitest / k6',
+          'Spec-Driven Development (SDD)',
+          'AI-assisted programming',
+          'Agent orchestration',
+        ],
       },
     ],
     languagesTitle: 'Languages',

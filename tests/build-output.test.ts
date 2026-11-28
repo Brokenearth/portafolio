@@ -24,6 +24,7 @@ describe('Static build output verification', () => {
       expect(html).not.toContain('johanhernandez064@gmail.com');
       expect(html).toContain('johanhernandez064');
       expect(html).toContain('gmail.com');
+      expect(html).toContain('Spec-Driven Development');
 
       if (page.requireLiveUrls) {
         expect(html).toContain('astro-view-transitions-enabled');
